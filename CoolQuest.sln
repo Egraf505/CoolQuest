@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31912.275
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoolQuest.backend", "CoolQuest.backend\CoolQuest.backend.csproj", "{69124456-F3C5-4A01-A190-3D1C201CEA0F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoolQuest.backend", "CoolQuest.backend\CoolQuest.backend.csproj", "{69124456-F3C5-4A01-A190-3D1C201CEA0F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CoolQuest.Data", "CoolQuest.Data", "{0787CCAC-B36A-44E3-9C80-492810DCFEC5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoolQuest.DbContext", "CoolQuest.DbContext\CoolQuest.DbContext.csproj", "{5E6BDDDD-0B06-492A-AD08-2EDD4ED4A0E7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +19,16 @@ Global
 		{69124456-F3C5-4A01-A190-3D1C201CEA0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{69124456-F3C5-4A01-A190-3D1C201CEA0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{69124456-F3C5-4A01-A190-3D1C201CEA0F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E6BDDDD-0B06-492A-AD08-2EDD4ED4A0E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E6BDDDD-0B06-492A-AD08-2EDD4ED4A0E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E6BDDDD-0B06-492A-AD08-2EDD4ED4A0E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E6BDDDD-0B06-492A-AD08-2EDD4ED4A0E7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5E6BDDDD-0B06-492A-AD08-2EDD4ED4A0E7} = {0787CCAC-B36A-44E3-9C80-492810DCFEC5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AE6A9A5C-6617-47CD-88FA-0E5C394A0435}
