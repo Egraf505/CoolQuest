@@ -1,10 +1,12 @@
 ﻿using CoolQuest.backend.Models;
 using CoolQuest.DbContext.Context;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
 namespace CoolQuest.backend.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
 

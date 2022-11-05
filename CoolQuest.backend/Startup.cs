@@ -1,4 +1,5 @@
 ﻿using CoolQuest.DbContext.Context;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 
 namespace CoolQuest.backend
@@ -19,7 +20,10 @@ namespace CoolQuest.backend
             services.AddDbContext<CoolQuestContex>(options => options.UseSqlServer(connection));
 
             // Аутенфикация
-
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
+            {
+                options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
+            });
 
             // Add services to the container.
             services.AddControllersWithViews();
@@ -40,7 +44,8 @@ namespace CoolQuest.backend
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            app.UseAuthentication();    // аутентификация
+            app.UseAuthorization();     // авторизация
 
             app.UseEndpoints(endpoints =>
             {
