@@ -1,0 +1,43 @@
+.header{
+    background-color: #3A211A;
+}
+.header_img{
+    height: 150px;
+    background-image: url('./../img/header-fon.jpg');
+    background-repeat: no-repeat;
+}
+
+.header_block{
+    display: none;
+    justify-content: center;
+    align-items: center;
+
+    margin-top: 30px;
+
+    h1{
+        max-width: 350px;
+        font-size: 16px;
+        line-height: 22px;
+        margin-left: 15px;
+
+        color: $brown;
+    }
+}
+
+
+
+//
+// media
+// 
+
+@media(max-width: 1200px){
+    .header{
+        background-color: transparent;
+    }
+    .header_img{
+        display: none;
+    }
+    .header_block{
+        display: flex;
+    }
+}
