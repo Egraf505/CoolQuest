@@ -1,20 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace CoolQuest.DbContext.Models
+namespace ScafoldBD
 {
-    public partial class Room
+    public partial class Type
     {
-        public Room()
+        public Type()
         {
-            Completeds = new HashSet<Completed>();
+            AnswerFalses = new HashSet<AnswerFalse>();
             Questions = new HashSet<Question>();
         }
 
         public int Id { get; set; }
         public string Title { get; set; } = null!;
 
-        public virtual ICollection<Completed> Completeds { get; set; }
+        public virtual ICollection<AnswerFalse> AnswerFalses { get; set; }
         public virtual ICollection<Question> Questions { get; set; }
     }
 }

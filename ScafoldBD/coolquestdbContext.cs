@@ -1,26 +1,36 @@
-﻿using CoolQuest.DbContext.Models;
+﻿using System;
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace CoolQuest.DbContext.Context
+namespace ScafoldBD
 {
-    public partial class CoolQuestContex : Microsoft.EntityFrameworkCore.DbContext
+    public partial class coolquestdbContext : DbContext
     {
-        // Таблицы
+        public coolquestdbContext()
+        {
+        }
+
+        public coolquestdbContext(DbContextOptions<coolquestdbContext> options)
+            : base(options)
+        {
+        }
 
         public virtual DbSet<AnswerFalse> AnswerFalses { get; set; } = null!;
         public virtual DbSet<Completed> Completeds { get; set; } = null!;
         public virtual DbSet<Question> Questions { get; set; } = null!;
         public virtual DbSet<Room> Rooms { get; set; } = null!;
-        public virtual DbSet<Models.Type> Types { get; set; } = null!;
+        public virtual DbSet<Type> Types { get; set; } = null!;
         public virtual DbSet<User> Users { get; set; } = null!;
 
-        // Конструкток с созданием базы 
-        public CoolQuestContex(DbContextOptions<CoolQuestContex> options)
-            : base(options)
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            Database.EnsureCreated();
+            if (!optionsBuilder.IsConfigured)
+            {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                optionsBuilder.UseSqlServer("Server=DESKTOP-P6BFK3M\\SQLEXPRESS;Database=coolquestdb;Trusted_Connection=True;");
+            }
         }
-
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -82,7 +92,7 @@ namespace CoolQuest.DbContext.Context
                 entity.Property(e => e.Title).HasMaxLength(200);
             });
 
-            modelBuilder.Entity<Models.Type>(entity =>
+            modelBuilder.Entity<Type>(entity =>
             {
                 entity.ToTable("Type");
             });

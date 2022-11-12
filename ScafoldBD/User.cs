@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace CoolQuest.DbContext.Models
+namespace ScafoldBD
 {
     public partial class User
     {
