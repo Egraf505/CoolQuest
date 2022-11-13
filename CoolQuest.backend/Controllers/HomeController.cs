@@ -1,13 +1,19 @@
-﻿using CoolQuest.backend.Models;
+﻿using CoolQuest.backend.DTO;
+using CoolQuest.backend.Models;
 using CoolQuest.DbContext.Context;
+using CoolQuest.DbContext.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
+using System.Text.Json;
 
 namespace CoolQuest.backend.Controllers
 {
     [Authorize]
-    public class HomeController : Controller
+    [ApiController]
+    [Route("[controller]")]
+    public class HomeController : ControllerBase
     {
 
         private readonly CoolQuestContex _db;
@@ -19,21 +25,16 @@ namespace CoolQuest.backend.Controllers
             _logger = logger;
             _db = contex;
         }
-        [HttpGet]
-        public IActionResult Index()
-        {
-            return View(_db.Users.Count());
-        }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
+        [HttpGet()]
+        public async Task<IEnumerable<Question>> Get()
+        {       
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+            Room room  = await _db.Rooms.FirstOrDefaultAsync();
+
+            var questions = _db.Questions.Where(x => x.RoomId == room.Id).ToList();
+
+            return questions;
+        }        
     }
 }

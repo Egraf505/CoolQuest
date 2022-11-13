@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace CoolQuest.DbContext.Models
+namespace newContext
 {
     public partial class Question
     {

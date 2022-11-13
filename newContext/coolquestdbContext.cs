@@ -1,15 +1,17 @@
-﻿using CoolQuest.DbContext.Models;
+﻿using System;
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace CoolQuest.DbContext.Context
+namespace newContext
 {
-    public partial class CoolQuestContex : Microsoft.EntityFrameworkCore.DbContext
+    public partial class coolquestdbContext : DbContext
     {
-        public CoolQuestContex()
+        public coolquestdbContext()
         {
         }
 
-        public CoolQuestContex(DbContextOptions<CoolQuestContex> options)
+        public coolquestdbContext(DbContextOptions<coolquestdbContext> options)
             : base(options)
         {
         }
@@ -18,9 +20,9 @@ namespace CoolQuest.DbContext.Context
         public virtual DbSet<Completed> Completeds { get; set; } = null!;
         public virtual DbSet<Question> Questions { get; set; } = null!;
         public virtual DbSet<Room> Rooms { get; set; } = null!;
-        public virtual DbSet<Models.Type> Types { get; set; } = null!;
+        public virtual DbSet<Type> Types { get; set; } = null!;
         public virtual DbSet<User> Users { get; set; } = null!;
-
+      
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -77,7 +79,7 @@ namespace CoolQuest.DbContext.Context
                 entity.Property(e => e.Title).HasMaxLength(200);
             });
 
-            modelBuilder.Entity<Models.Type>(entity =>
+            modelBuilder.Entity<Type>(entity =>
             {
                 entity.ToTable("Type");
             });
@@ -87,6 +89,4 @@ namespace CoolQuest.DbContext.Context
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
     }
-
 }
-

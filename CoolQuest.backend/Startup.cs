@@ -25,8 +25,10 @@ namespace CoolQuest.backend
                 options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
             });
 
+            services.AddEndpointsApiExplorer();
+
             // Add services to the container.
-            services.AddControllersWithViews();
+            services.AddControllers();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -49,9 +51,7 @@ namespace CoolQuest.backend
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllers();
             });
         }
     }
