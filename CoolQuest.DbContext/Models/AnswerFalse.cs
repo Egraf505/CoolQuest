@@ -7,8 +7,8 @@ namespace CoolQuest.DbContext.Models
     {
         public int Id { get; set; }
         public string Title { get; set; } = null!;
-        public int TypeId { get; set; }
+        public int QuestionId { get; set; }
 
-        public virtual Type Type { get; set; } = null!;
+        public virtual Question Question { get; set; } = null!;
     }
 }

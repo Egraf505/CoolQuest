@@ -28,9 +28,9 @@ namespace CoolQuest.DbContext.Context
             {
                 entity.ToTable("AnswerFalse");
 
-                entity.HasOne(d => d.Type)
+                entity.HasOne(d => d.Question)
                     .WithMany(p => p.AnswerFalses)
-                    .HasForeignKey(d => d.TypeId)
+                    .HasForeignKey(d => d.QuestionId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_AnswerFalse_Type");
             });
