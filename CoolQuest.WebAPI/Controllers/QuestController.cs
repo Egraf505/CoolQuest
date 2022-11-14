@@ -17,7 +17,7 @@ namespace CoolQuest.WebAPI.Controllers
             _db = contex;
         }
 
-        [HttpGet("{Roomid}")]
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetAsync(int id)
         {
 
@@ -36,9 +36,12 @@ namespace CoolQuest.WebAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostResultAsync(Completed completed)
+        public async Task<IActionResult> PostResultAsync(int userId, int roomId, int questionId)
         {
-            if (_db.Completeds.Contains(completed))
+
+            Completed completed = await _db.Completeds.FirstOrDefaultAsync(x => x.UserId == userId && x.RoomId == roomId && x.QuestionId == questionId);
+
+            if (completed == null)
             {
                 return BadRequest();
             }
