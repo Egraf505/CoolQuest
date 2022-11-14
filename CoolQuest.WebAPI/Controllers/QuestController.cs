@@ -39,6 +39,21 @@ namespace CoolQuest.WebAPI.Controllers
         public async Task<IActionResult> PostResultAsync(int userId, int roomId, int questionId)
         {
 
+            if (!_db.Users.Any(x => x.Id == userId))
+            {
+                return NotFound();
+            }
+
+            if (!_db.Rooms.Any(x => x.Id == roomId))
+            {
+                return NotFound();
+            }
+
+            if (!_db.Questions.Any(x => x.Id == questionId))
+            {
+                return NotFound();
+            }
+
             Completed completed = await _db.Completeds.FirstOrDefaultAsync(x => x.UserId == userId && x.RoomId == roomId && x.QuestionId == questionId);
 
             if (completed != null)
