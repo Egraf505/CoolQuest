@@ -1,0 +1,114 @@
+.button {
+    padding: 10px 20px;
+    font-weight: 500;
+    font-size: 16px;
+    border-radius: 7px;  
+    transition: transform 0.1s ease-in; 
+    cursor: pointer; 
+
+    &.primary{
+        background-color: $brown;
+        color: #fff;
+
+        &:hover{
+            background-color: #7d4949;
+        }
+    }
+
+    &.outlined{
+        border: 1px solid $brown;
+        color: $brown;
+
+    }
+
+    &:hover{
+        background-color: rgba(92, 50, 51, 0.1);
+    }
+
+    &:active{
+        transform: scale(98%);
+    }
+
+    & + & {
+        margin-left: 5px;
+    }
+}
+
+.title{
+    font-weight: 700;
+    font-size: 50px;
+    line-height: 67px;
+    color: $brown;
+    text-align: center;
+
+    margin-top: 30px;
+    
+    padding: 10px 0;
+    border-top: 1px solid $brown;
+    border-bottom: 1px solid $brown;
+}
+
+.block_form_input{
+
+    & + &{
+        margin-top: 10px;
+    }
+
+    h3 {
+        font-size: 16px;
+        margin-bottom: 6px;
+    }
+
+    textarea{
+        min-width: 100%;
+        max-width: 100%;
+    }
+}
+
+.form_input{
+    width: 100%;
+    
+    padding: 15px 25px;
+    border: 1px solid transparent;
+    border-radius: $main-radius;
+    color: $brown;
+    font-size: 18px;
+    line-height: 18px;
+
+    &:hover{
+        border-color: $brown;
+    }
+
+    &:focus{
+        border-color: $brown;
+    }
+}
+
+.questionNumber{
+    font-size: 18px;
+    font-weight: 600;
+    text-align: center;
+    margin-top: 35px;
+}
+
+.question{
+    font-family: 'Montserrat', sans-serif;
+    
+    font-size: 18px;
+    padding: 15px 0;
+}
+
+//
+// media
+// 
+
+@media(max-width: 480px){
+    .title{
+        font-size: 24px;
+        line-height: 24px;
+    }
+
+    .question{
+        font-size: 16px;
+    }
+}

@@ -1,0 +1,21 @@
+
+
+// base
+
+@import "./base/base";
+@import "./base/colors";
+@import "./base/reset";
+@import "./base/vars";
+
+// main styles
+
+@import "./blocks/mainStyles";
+
+//blocks
+
+@import "./blocks/header";
+@import "./blocks/login";
+@import "./blocks/reg";
+@import "./blocks/createTask";
+@import "./blocks/pincode";
+@import "./blocks/test";

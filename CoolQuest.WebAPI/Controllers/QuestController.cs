@@ -21,7 +21,7 @@ namespace CoolQuest.WebAPI.Controllers
         public async Task<IActionResult> GetAsync(int id)
         {
 
-            List<QuestionDTO> questionsDTO = new List<QuestionDTO>();
+            List<QuestionDTO> questionsDTO = new();
 
             var questions = await _db.Questions.Where(x => x.RoomId == id).ToListAsync();
 

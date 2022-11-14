@@ -1,10 +1,11 @@
 using CoolQuest.DbContext.Context;
+using JavaScriptEngineSwitcher.ChakraCore;
+using JavaScriptEngineSwitcher.Extensions.MsDependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using React.AspNet;
 
 var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
 
 // Строка подключение
 string connection = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -12,6 +13,13 @@ builder.Services.AddDbContext<CoolQuestContex>(options => options.UseSqlServer(c
 
 // Аутенфикация
 
+// React
+builder.Services.AddMemoryCache();
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.AddReact();
+builder.Services.AddJsEngineSwitcher(options => options.DefaultEngineName = ChakraCoreJsEngine.EngineName).AddChakraCore();
+
+// Контроллеры
 builder.Services.AddControllers().AddNewtonsoftJson(
           options => {
               options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
@@ -31,6 +39,10 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseReact(config => { });
+app.UseDefaultFiles();
+app.UseStaticFiles();
 
 app.UseRouting();
 
