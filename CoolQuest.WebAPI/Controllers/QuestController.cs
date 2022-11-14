@@ -28,13 +28,8 @@ namespace CoolQuest.WebAPI.Controllers
             var answerFalsesDb = await _db.AnswerFalses.ToListAsync();
 
             if (questions != null)
-            {
-                foreach (var question in questions)
-                {                  
-                    questionsDTO.Add(new QuestionDTO() { question = question, answerFalses = answerFalsesDb.Where(x=>x.QuestionId == question.Id)});
-                }
-
-                return Ok(questionsDTO);
+            {               
+                return Ok(questions);
             }       
 
             return BadRequest();
