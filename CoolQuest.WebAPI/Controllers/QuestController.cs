@@ -41,12 +41,12 @@ namespace CoolQuest.WebAPI.Controllers
 
             Completed completed = await _db.Completeds.FirstOrDefaultAsync(x => x.UserId == userId && x.RoomId == roomId && x.QuestionId == questionId);
 
-            if (completed == null)
+            if (completed != null)
             {
                 return BadRequest();
             }
 
-            _db.Completeds.Add(completed);
+            _db.Completeds.Add(new Completed() { UserId = userId, RoomId = roomId, QuestionId = questionId});
             await _db.SaveChangesAsync();
 
             return Ok();
