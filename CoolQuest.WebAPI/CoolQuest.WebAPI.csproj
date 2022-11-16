@@ -16,4 +16,8 @@
     <ProjectReference Include="..\CoolQuest.DbContext\CoolQuest.DbContext.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
 </Project>

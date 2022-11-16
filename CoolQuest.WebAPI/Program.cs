@@ -2,7 +2,7 @@ using CoolQuest.DbContext.Context;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 
-var builder = WebApplication.CreateBuilder();
+var builder = WebApplication.CreateBuilder(args);
 
 // Строка подключение
 string connection = builder.Configuration.GetConnectionString("DefaultConnection");

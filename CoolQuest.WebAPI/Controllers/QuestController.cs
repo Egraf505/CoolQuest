@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CoolQuest.WebAPI.Controllers
 {
-    [Route("questions")]
+    [Route("quest")]
     [ApiController]
     public class QuestController : ControllerBase
     {
@@ -18,21 +18,21 @@ namespace CoolQuest.WebAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetAsync(int id)
+        public async Task<IActionResult> GetAsync(int questionId)
         {
+            Question question = await _db.Questions.FirstOrDefaultAsync(x => x.Id == questionId);
 
-            List<QuestionDTO> questionsDTO = new();
+            if (question == null)            
+                return NotFound();
 
-            var questions = await _db.Questions.Where(x => x.RoomId == id).ToListAsync();
+            List<AnswerFalse> answerFalses = _db.AnswerFalses.Where(x => x.QuestionId == question.Id).ToList();
+            var type = await _db.Types.FirstOrDefaultAsync(x => x.Id == question.TypeId);
+            string typeTitle = type.Title;
 
-            var answerFalsesDb = await _db.AnswerFalses.ToListAsync();
 
-            if (questions != null)
-            {               
-                return Ok(questions);
-            }       
+            QuestionDTO questionDTO = new QuestionDTO() { question = question , Title = typeTitle, answerFalses = answerFalses};
 
-            return BadRequest();
+            return Ok(questionDTO);            
         }
 
         [HttpPost]
