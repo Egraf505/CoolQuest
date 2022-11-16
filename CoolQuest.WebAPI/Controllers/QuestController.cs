@@ -17,7 +17,7 @@ namespace CoolQuest.WebAPI.Controllers
             _db = contex;
         }
 
-        [HttpGet("{id}")]
+        [HttpGet()]
         public async Task<IActionResult> GetAsync(int id)
         {
 
@@ -31,7 +31,7 @@ namespace CoolQuest.WebAPI.Controllers
             {               
                 return Ok(questions);
             }       
-
+            
             return BadRequest();
         }
 
