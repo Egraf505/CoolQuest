@@ -22,16 +22,29 @@ namespace CoolQuest.WebAPI.Controllers
         {
             Question question = await _db.Questions.FirstOrDefaultAsync(x => x.Id == questionId);
 
-            if (question == null)            
+            if (question == null)
                 return NotFound();
 
             List<AnswerFalse> answerFalses = _db.AnswerFalses.Where(x => x.QuestionId == question.Id).ToList();
             var type = await _db.Types.FirstOrDefaultAsync(x => x.Id == question.TypeId);
             var room = await _db.Rooms.FirstOrDefaultAsync(x => x.Id == question.RoomId);
 
-            QuestionDTO questionDTO = new QuestionDTO() { Question = question , AnswerFalses = answerFalses};   
+            QuestionDTO questionDTO = new QuestionDTO() { Question = question, AnswerFalses = answerFalses };
 
-            return Ok(questionDTO);            
+            return Ok(questionDTO);
+        }
+
+        [HttpGet("{roomId}")]
+        public async Task<IActionResult> GetQuestionsAsync(int roomId)
+        {
+            if (!await _db.Rooms.AnyAsync(x => x.Id == roomId))
+            {
+                return NotFound();
+            }
+
+            var questions = await _db.Questions.Where(x => x.RoomId == roomId).ToListAsync();
+
+            return Ok(questions);
         }
 
         [HttpGet()]
