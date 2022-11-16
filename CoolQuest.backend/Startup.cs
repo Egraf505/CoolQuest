@@ -1,6 +1,10 @@
 ﻿using CoolQuest.DbContext.Context;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
+using JavaScriptEngineSwitcher.ChakraCore;
+using JavaScriptEngineSwitcher.Extensions.MsDependencyInjection;
+using React.AspNet;
 
 namespace CoolQuest.backend
 {
@@ -25,7 +29,13 @@ namespace CoolQuest.backend
                 options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
             });
 
-            services.AddEndpointsApiExplorer();
+            // React
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddReact();
+
+            // Make sure a JS engine is registered, or you will get an error!
+            services.AddJsEngineSwitcher(options => options.DefaultEngineName = ChakraCoreJsEngine.EngineName)
+              .AddChakraCore();
 
             // Add services to the container.
             services.AddControllersWithViews();
@@ -42,6 +52,9 @@ namespace CoolQuest.backend
             }
 
             app.UseHttpsRedirection();
+
+            app.UseReact(conf => { });
+
             app.UseStaticFiles();
 
             app.UseRouting();

@@ -9,7 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CoolQuest.Data", "CoolQuest
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoolQuest.DbContext", "CoolQuest.DbContext\CoolQuest.DbContext.csproj", "{5E6BDDDD-0B06-492A-AD08-2EDD4ED4A0E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoolQuest.WebAPI", "CoolQuest.WebAPI\CoolQuest.WebAPI.csproj", "{5482B636-669C-40F8-9CDA-B9CFCFABADA5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoolQuest.WebAPI", "CoolQuest.WebAPI\CoolQuest.WebAPI.csproj", "{5482B636-669C-40F8-9CDA-B9CFCFABADA5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

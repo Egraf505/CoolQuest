@@ -6,7 +6,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
+using System.Text.Encodings.Web;
 using System.Text.Json;
+using System.Text.Unicode;
 
 namespace CoolQuest.backend.Controllers
 {
@@ -32,7 +34,22 @@ namespace CoolQuest.backend.Controllers
 
             var questions = _db.Questions.Where(x => x.RoomId == room.Id).ToList();
 
-            return View();
-        }        
+            return View(questions);
+        }
+
+        [Route("questions")]
+        [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
+        public ActionResult Questions(int roomId)
+        {
+            var options = new JsonSerializerOptions
+            {
+                Encoder = JavaScriptEncoder.Create(UnicodeRanges.BasicLatin, UnicodeRanges.Cyrillic),
+                WriteIndented = true
+            };
+
+            _logger.Log(LogLevel.Information, "Requested Path: {0}", Request.Path);
+
+            return Json(_db.Questions.Where(x => x.RoomId == roomId).ToList(), options);
+        }
     }
 }

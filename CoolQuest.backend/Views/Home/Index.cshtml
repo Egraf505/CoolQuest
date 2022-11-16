@@ -1,9 +1,19 @@
-﻿@model int
+﻿@using CoolQuest.DbContext.Models
+@model List<Question>
 @{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Колличество пользователей @Model</p>
-</div>
+<html>
+<head>
+  <title>Hello React</title>
+</head>
+<body>
+    <h2>Вопросы</h2>    
+    <div id="content"></div>
+    <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/16.13.0/umd/react.development.js"></script>
+    <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.13.0/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/remarkable/1.7.1/remarkable.min.js"></script>
+<script src="@Url.Content("~/js/tutorial.jsx")"></script>
+</body>
+</html>
