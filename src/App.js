@@ -4,16 +4,20 @@ import Login from './pages/Login';
 import Registration from './pages/Registration';
 import PinCode from './pages/PinCode';
 import Test from './pages/Test';
+import Room from './pages/Room';
+
+import { BrowserRouter } from "react-router-dom";
+
+import AppRouter from "./components/AppRouter";
+
+
 
 const App = () => {
     return (
       <>
-        {/* <Login /> */}
-        {/* <Registration /> */}
-        {/* <CreateTask /> */}
-        {/* <PinCode /> */}
-        <Test />
-
+        <BrowserRouter>
+          <AppRouter />
+        </BrowserRouter>
       </>
     );
   }
