@@ -14,7 +14,7 @@ builder.Services.AddDbContext<CoolQuestContex>(options => options.UseSqlServer(c
 builder.Services.AddCors(options => options.AddPolicy("CorsPolicy",
     builder =>
     {
-        builder.WithOrigins("https://localhost:3000")
+        builder.WithOrigins("http://localhost:3000")
         .AllowAnyMethod()
         .AllowAnyHeader();
     }));
@@ -41,9 +41,9 @@ app.UseHttpsRedirection();
 app.UseDefaultFiles();
 app.UseStaticFiles();
 
-app.UseCors("CorsPolicy");
-
 app.UseRouting();
+
+app.UseCors("CorsPolicy");
 
 app.UseAuthorization();
 
