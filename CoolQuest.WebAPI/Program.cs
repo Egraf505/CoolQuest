@@ -13,6 +13,13 @@ builder.Services.AddDbContext<CoolQuestContex>(options => options.UseSqlServer(c
 
 // Аутенфикация
 
+//Разрешение CORS
+builder.Services.AddCors(options => options.AddPolicy("CorsPolicy",
+    builder =>
+    {
+        builder.WithOrigins("https://localhost:3000");
+    }));
+
 // React
 builder.Services.AddMemoryCache();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();

@@ -12,7 +12,7 @@ using System.Text.Unicode;
 
 namespace CoolQuest.backend.Controllers
 {
-    [Authorize]    
+ 
     public class HomeController : Controller
     {
 
@@ -47,7 +47,7 @@ namespace CoolQuest.backend.Controllers
                 WriteIndented = true
             };
 
-            _logger.Log(LogLevel.Information, "Requested Path: {0}", Request.Path);
+            _logger.Log(LogLevel.Information, "Requested Path: {0}", Request.Path);          
 
             return Json(_db.Questions.Where(x => x.RoomId == roomId).ToList(), options);
         }
