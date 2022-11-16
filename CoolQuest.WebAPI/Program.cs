@@ -1,9 +1,6 @@
 using CoolQuest.DbContext.Context;
-using JavaScriptEngineSwitcher.ChakraCore;
-using JavaScriptEngineSwitcher.Extensions.MsDependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
-using React.AspNet;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,12 +16,6 @@ builder.Services.AddCors(options => options.AddPolicy("CorsPolicy",
     {
         builder.WithOrigins("https://localhost:3000");
     }));
-
-// React
-builder.Services.AddMemoryCache();
-builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-builder.Services.AddReact();
-builder.Services.AddJsEngineSwitcher(options => options.DefaultEngineName = ChakraCoreJsEngine.EngineName).AddChakraCore();
 
 // Контроллеры
 builder.Services.AddControllers().AddNewtonsoftJson(
@@ -45,7 +36,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseReact(config => { });
 app.UseDefaultFiles();
 app.UseStaticFiles();
 

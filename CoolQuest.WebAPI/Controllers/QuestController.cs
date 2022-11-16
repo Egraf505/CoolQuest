@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CoolQuest.WebAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("questions")]
     [ApiController]
     public class QuestController : ControllerBase
     {
