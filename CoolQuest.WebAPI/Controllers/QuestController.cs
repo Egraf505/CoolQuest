@@ -26,9 +26,10 @@ namespace CoolQuest.WebAPI.Controllers
                 return NotFound();
 
             List<AnswerFalse> answerFalses = _db.AnswerFalses.Where(x => x.QuestionId == question.Id).ToList();
-            var type = await _db.Types.FirstOrDefaultAsync(x => x.Id == question.TypeId);           
+            var type = await _db.Types.FirstOrDefaultAsync(x => x.Id == question.TypeId);
+            var room = await _db.Types.FirstOrDefaultAsync(x => x.Id == question.RoomId);
 
-            QuestionDTO questionDTO = new QuestionDTO() { question = question , answerFalses = answerFalses};
+            QuestionDTO questionDTO = new QuestionDTO() { Question = question , AnswerFalses = answerFalses};
 
             return Ok(questionDTO);            
         }
