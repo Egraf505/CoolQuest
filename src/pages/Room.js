@@ -1,43 +1,45 @@
 import React, { useEffect, useState } from 'react'
-import Header from '../components/Header';
-import TestForm from '../components/TestForm';
-import {getRoom} from '../http/questAPI'
+import { useParams } from 'react-router-dom';
+import {getRoom, postQues} from '../http/questAPI'
+
+import { useLocation } from 'react-router-dom'
+import Test from './Test';
+import PinCode from './PinCode';
+
 
 const Room = () => {
-    
-    const [idQues, setIdQues] = useState(0)
-    const [dataRoom, setDataRoom] = useState({})
+
+    let { id } = useParams(); 
+
+    // const location = useLocation()
+    // console.log(location.search)
+
+    const [nameRoom, setNameRoom] = useState('Начальная')
+    const [title, setTitle] = useState('')
+    const [type, setType] = useState('test')
+    const [answers, setAnswers] = useState([]) // him id
+
     const [loading, setLoading] = useState(true)
     
     useEffect(() => {
-        getRoom().then(data => {
-            
+
+        getRoom(id).then(data => {
+
             console.log(data)
+            const newId = data.answerFalses[data.answerFalses.length - 1].id + 1
+
+            setNameRoom(data.question.room.title)
+            setTitle(data.question.title)
+            setType(data.question.type.title)
+            setAnswers([...data.answerFalses.map(i => { return {id: i.id,title: i.title, ok: false}}), {id: newId, title: data.question.answer, ok: true}])
 
         }).finally(() => setLoading(false))
 
     }, []);
 
-    // async function test () {
-    //     let responce = await fetch(
-    //         'https://localhost:7201/questions/1',
-
-    //         {
-    //             method: 'get',
-    //         }
-    //     )
-    //     // ).then(( res ) => res.json()).then((resJson) => {console.log(resJson)}) 
-
-    //     let responceJson = await responce.json()
-
-    //     console.log(responceJson)
-    // }
-
-    // test()
-
-    // useEffect(() => {
-        
-    // }, [idQues])
+    const sendAnswer = (value) => {
+        postQues()
+    }
 
     if (loading) {
         return <div>Загрузка...</div>
@@ -45,9 +47,19 @@ const Room = () => {
 
     return (
         <>
-            <Header />
-
-            Комната пустая
+            <div className='nameRoom'>Комната «{nameRoom}»</div>
+            {
+                type == 'Test'
+                ?
+                <Test
+                    id={id}
+                    textQuestion={title}
+                    answers={answers}
+                    sendAnswer={sendAnswer}
+                />
+                :
+                <PinCode />
+            }
         </>
     );
 }

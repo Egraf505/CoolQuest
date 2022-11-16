@@ -1,29 +1,58 @@
 import React, { useEffect, useState } from 'react'
-import Header from '../components/Header';
-import TestForm from '../components/TestForm';
-import Way from '../components/Way';
-import {getRoom} from '../http/questAPI'
 
-const Test = () => {
+import testImg from './../img/test-img.jpg'
+
+const Test = ({id, textQuestion, answers, sendAnswer}) => {
     
-    const [loading, setLoading] = useState(true)
-    
+    const [allAnswers, setAllAnswers] = useState([])
+
     useEffect(() => {
-        getRoom(1).then(data => {
-            console.log(data)
-        }).finally(() => setLoading(false))
-    }, []);
+        
+        for (let i = answers.length - 1; i > 0;  i--){
+            let j = Math.floor(Math.random() * (i + 1));
+            [answers[i], answers[j]] = [answers[j], answers[i]];
+        }
 
-    if (loading) {
-        return <div>Загрузка...</div>
-    }
+        setAllAnswers(answers)
+
+    }, [])
 
     return (
-        <>
-            <Header />
-            <TestForm />
-            {/* <Way /> */}
-        </>
+        <section className='test'>
+            <div className='container-mini'>
+                <div className='questionNumber'>Вопрос №{id}</div>
+
+                <img 
+                    className='test_img'
+                    src={testImg}
+                    alt='foto'
+                />
+
+                <div className='question'>
+                    {textQuestion}
+                </div>
+
+                <div className='test_form'>
+                    <div className='test_form_answers'>
+
+                        {
+                            allAnswers.map((item) => 
+                                <button 
+                                    id={`answer-${item.id}`}
+                                    className='test_form_answers_one' 
+                                    key={item.title}
+                                    onClick={e => {sendAnswer(answers.filter(ans => ans.id == e.target.id.split('-')[1])[0].ok)}}
+                                >
+                                {item.title}
+                                </button>
+                            )
+                        }
+
+                    </div>
+                </div>
+            </div>
+
+        </section>
     );
 }
   

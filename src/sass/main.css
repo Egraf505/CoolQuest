@@ -472,7 +472,7 @@ img {
           box-shadow: 0px 0px 16px 0px rgba(34, 60, 80, 0.15);
   -webkit-transition: all 0.2s ease-in;
   transition: all 0.2s ease-in;
-  padding: 10px 30px;
+  padding: 15px 30px;
   position: relative;
 }
 
@@ -512,5 +512,12 @@ img {
 
 .test_form_answers_one + .test_form_answers_one {
   margin-top: 15px;
+}
+
+.nameRoom {
+  font-family: 'Montserrat', sans-serif;
+  text-align: center;
+  font-size: 20px;
+  padding: 10px 0;
 }
 /*# sourceMappingURL=main.css.map */
