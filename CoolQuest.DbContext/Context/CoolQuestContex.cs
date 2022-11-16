@@ -7,6 +7,7 @@ namespace CoolQuest.DbContext.Context
     {
         public CoolQuestContex()
         {
+            Database.EnsureCreated();
         }
 
         public CoolQuestContex(DbContextOptions<CoolQuestContex> options)
