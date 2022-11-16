@@ -34,6 +34,7 @@ namespace CoolQuest.WebAPI.Controllers
             return Ok(questionDTO);            
         }
 
+        [HttpGet()]
         public async Task<IActionResult> GetAsync(int questionsId, int userId)
         {
             Completed completed = await _db.Completeds.FirstOrDefaultAsync(x => x.UserId == userId && x.QuestionId == questionsId);
