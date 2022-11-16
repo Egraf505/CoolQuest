@@ -17,7 +17,7 @@ namespace CoolQuest.WebAPI.Controllers
             _db = contex;
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{questionId}")]
         public async Task<IActionResult> GetAsync(int questionId)
         {
             Question question = await _db.Questions.FirstOrDefaultAsync(x => x.Id == questionId);
@@ -26,11 +26,9 @@ namespace CoolQuest.WebAPI.Controllers
                 return NotFound();
 
             List<AnswerFalse> answerFalses = _db.AnswerFalses.Where(x => x.QuestionId == question.Id).ToList();
-            var type = await _db.Types.FirstOrDefaultAsync(x => x.Id == question.TypeId);
-            string typeTitle = type.Title;
+            var type = await _db.Types.FirstOrDefaultAsync(x => x.Id == question.TypeId);           
 
-
-            QuestionDTO questionDTO = new QuestionDTO() { question = question , Title = typeTitle, answerFalses = answerFalses};
+            QuestionDTO questionDTO = new QuestionDTO() { question = question , answerFalses = answerFalses};
 
             return Ok(questionDTO);            
         }
