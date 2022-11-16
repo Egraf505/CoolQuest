@@ -10,10 +10,8 @@ using System.Text.Json;
 
 namespace CoolQuest.backend.Controllers
 {
-    [Authorize]
-    [ApiController]
-    [Route("[controller]")]
-    public class HomeController : ControllerBase
+    [Authorize]    
+    public class HomeController : Controller
     {
 
         private readonly CoolQuestContex _db;
@@ -27,14 +25,14 @@ namespace CoolQuest.backend.Controllers
         }
 
         [HttpGet()]
-        public async Task<IEnumerable<Question>> Get()
+        public async Task<IActionResult> Index()
         {       
 
             Room room  = await _db.Rooms.FirstOrDefaultAsync();
 
             var questions = _db.Questions.Where(x => x.RoomId == room.Id).ToList();
 
-            return questions;
+            return View();
         }        
     }
 }

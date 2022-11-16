@@ -28,7 +28,7 @@ namespace CoolQuest.backend
             services.AddEndpointsApiExplorer();
 
             // Add services to the container.
-            services.AddControllers();
+            services.AddControllersWithViews();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -50,8 +50,10 @@ namespace CoolQuest.backend
             app.UseAuthorization();     // авторизация
 
             app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
+            {               
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }
