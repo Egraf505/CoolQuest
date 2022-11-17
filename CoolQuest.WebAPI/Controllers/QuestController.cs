@@ -97,30 +97,6 @@ namespace CoolQuest.WebAPI.Controllers
             await _db.SaveChangesAsync();
 
             return Ok("Copleted created");
-        }
-        
-        // Добавить пользователя
-        [HttpPost("/userAdd")]
-        public async Task<IActionResult> PostUserAsync(string name, string surname, string email, string password)
-        {
-            try
-            {
-                if (_db.Users.Any(x => x.Name == name && x.SurName == surname && x.Email == email && x.Password == password))
-                {
-                    return BadRequest(new { errorText = "User is exit" });
-                }
-
-                User user = new User() { Name = name, SurName = surname, Email = email, Password = password };
-
-                _db.Users.Add(user);
-                await _db.SaveChangesAsync();
-
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
+        }       
     }
 }
