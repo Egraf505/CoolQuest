@@ -41,7 +41,7 @@ namespace CoolQuest.WebAPI.Controllers
             var response = new
             {
                 access_token = encodedJwt,
-                username = identity.Name
+                id = _db.Users.FirstOrDefault(x => x.Email == identity.Name)!.Id
             };
 
             return Ok(response);
@@ -64,3 +64,4 @@ namespace CoolQuest.WebAPI.Controllers
         }
     }
 }
+
