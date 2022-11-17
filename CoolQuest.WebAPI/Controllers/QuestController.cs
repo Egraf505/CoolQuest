@@ -93,6 +93,8 @@ namespace CoolQuest.WebAPI.Controllers
 
             return Ok("Copleted created");
         }
+
+        // Добавить пользователя
         [HttpPost("/userAdd")]
         public async Task<IActionResult> PostUserAsync(string name, string surname, string email, string password)
         {
