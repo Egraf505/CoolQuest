@@ -23,11 +23,8 @@ namespace CoolQuest.WebAPI.Controllers
             var identity = GetIdentity(username, password);
             if (identity == null)
                 return BadRequest(new { errorText = "Invalid username or password." });
-<<<<<<< HEAD
 
             return Ok();
-=======
->>>>>>> ba907163f9abceb20552162f1b2bdc820c12296d
         }
 
         private ClaimsIdentity GetIdentity(string email, string password)
