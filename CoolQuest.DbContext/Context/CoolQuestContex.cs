@@ -81,8 +81,7 @@ namespace CoolQuest.DbContext.Context
             modelBuilder.Entity<Models.Type>(entity =>
             {
                 entity.ToTable("Type");
-            });
-
+            });            
             OnModelCreatingPartial(modelBuilder);
         }
 
