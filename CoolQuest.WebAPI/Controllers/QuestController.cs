@@ -78,7 +78,7 @@ namespace CoolQuest.WebAPI.Controllers
 
             if (!_db.Questions.Any(x => x.Id == questionId))
             {
-                return NotFound(new { errorText = "Question not found" } );
+                return NotFound(new { errorText = "Question not found" });
             }
 
             Completed completed = await _db.Completeds.FirstOrDefaultAsync(x => x.UserId == userId && x.RoomId == roomId && x.QuestionId == questionId);
@@ -88,11 +88,19 @@ namespace CoolQuest.WebAPI.Controllers
                 return BadRequest("Completed is exit");
             }
 
-            _db.Completeds.Add(new Completed() { UserId = userId, RoomId = roomId, QuestionId = questionId});
+            _db.Completeds.Add(new Completed() { UserId = userId, RoomId = roomId, QuestionId = questionId });
             await _db.SaveChangesAsync();
 
             return Ok("Copleted created");
         }
+        public async Task<IActionResult> PostUserAsync(string name, string surname, string email, string password)
+        {
+            User user = new User() { Name = name, SurName = surname, Email = email, Password = password };
 
+            _db.Users.Add(user);
+            await _db.SaveChangesAsync();
+
+            return Ok();
+        }
     }
 }
