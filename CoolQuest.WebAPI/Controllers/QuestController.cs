@@ -1,12 +1,14 @@
 ﻿using CoolQuest.backend.DTO;
 using CoolQuest.DbContext.Context;
 using CoolQuest.DbContext.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace CoolQuest.WebAPI.Controllers
 {
+    [Authorize]
     [Route("quest")]
     [ApiController]
     public class QuestController : ControllerBase
