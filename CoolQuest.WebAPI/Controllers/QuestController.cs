@@ -98,6 +98,12 @@ namespace CoolQuest.WebAPI.Controllers
 
             return Ok("Copleted created");
         }
+        public async Task<IActionResult> PostUserAsync(string name, string surname, string email, string password)
+        {
+            User user = new User() { Name = name, SurName = surname, Email = email, Password = password };
+
+            _db.Users.Add(user);
+            await _db.SaveChangesAsync();
 
         // Добавить пользователя
         [HttpPost("/userAdd")]
