@@ -2,13 +2,9 @@ import Room from "./pages/Room"
 import Login from "./pages/Login"
 import Test from "./pages/Test"
 import Registration from "./pages/Registration"
+import Error from "./pages/Error"
 
 export const publicPages = [
-    {
-        path: '/',
-        component: Room,
-    },
-
     {
         path: '/login',
         component: Login,
@@ -20,15 +16,10 @@ export const publicPages = [
     },
 
     {
-        path: '/room',
-        component: Test,
+        path: '/error',
+        component: Error,
     },
 
-    // {
-    //     path: '/room' + '/:id',
-    //     component: Room,
-    // },
-    
     {
         path: '/quest' + '/:id',
         component: Room,

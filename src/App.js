@@ -1,10 +1,5 @@
 import React from 'react'
-import CreateTask from './pages/CreateTask';
-import Login from './pages/Login';
-import Registration from './pages/Registration';
-import PinCode from './pages/PinCode';
-import Test from './pages/Test';
-import Room from './pages/Room';
+
 
 import { BrowserRouter } from "react-router-dom";
 
@@ -14,6 +9,21 @@ import Header from './components/Header';
 
 
 const App = () => {
+
+    // useEffect(() => {
+      
+    //   auth()
+    //   .then(data => {
+    //     console.log('Все ок')
+    //   })
+    //   .catch(e => {
+    //     const urlOld = e.response.config.ur
+    //     // history.push("/login");
+    //   })
+
+    // }, [])
+
+
     return (
       <>
         <BrowserRouter>

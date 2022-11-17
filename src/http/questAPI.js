@@ -1,16 +1,15 @@
-import { $host } from './index'
-
+import { $authHost, $host } from './index'
 
 export const getRoom = async (id) => {
-    const {data} = await $host.get('quest/' + id)
+    const {data} = await $authHost.get('quest/' + id)
     return data
 }
 
-export const postQues = async (value) => {
+export const postQuest = async (userId, roomId, questionId) => {
     const {data} = await $host.post('quest', null, { params: {
-        userId: 1,
-        roomId: 1,
-        questionId: 2
+        userId,
+        roomId,
+        questionId
       }})
     return data
 }

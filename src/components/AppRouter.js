@@ -3,7 +3,6 @@ import { publicPages } from '../routes';
 import {Redirect, Route, Switch} from 'react-router-dom'
 
 const AppRouter = () => {
-
     return(
         <Switch>
 
@@ -11,7 +10,7 @@ const AppRouter = () => {
                 <Route key={path} path={path} component={component} exact />
             )}   
             
-            <Redirect to={'/'}/>
+            <Redirect to={'/error'}/>
 
         </Switch>
     )
