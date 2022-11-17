@@ -19,6 +19,8 @@ namespace CoolQuest.WebAPI.Controllers
             _db = contex;
         }
 
+
+        // получить вопрос по id
         [HttpGet("{questionId}")]
         public async Task<IActionResult> GetAsync(int questionId)
         {
@@ -36,6 +38,7 @@ namespace CoolQuest.WebAPI.Controllers
             return Ok(questionDTO);
         }
 
+        // вернуть все вопросы с комнаты
         [HttpGet("/questions{roomId}")]
         public async Task<IActionResult> GetQuestionsAsync(int roomId)
         {
@@ -49,6 +52,7 @@ namespace CoolQuest.WebAPI.Controllers
             return Ok(questions);
         }
 
+        // Пройдено ли задание пользователем
         [HttpGet()]
         public async Task<IActionResult> GetAsync(int questionsId, int userId)
         {
@@ -62,6 +66,7 @@ namespace CoolQuest.WebAPI.Controllers
             return Ok(completed);
         }
 
+        // Добавить выполненое задание
         [HttpPost]
         public async Task<IActionResult> PostResultAsync(int userId, int roomId, int questionId)
         {
