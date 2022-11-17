@@ -17,8 +17,3 @@ export const reg = async (name, surname, email, password) => {
     }})
   return data
 }
-
-// export const auth = async () => {
-//   const {data} = await $authHost.get('quest/1')
-//   return data
-// }

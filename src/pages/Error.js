@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 
 import errorLogo from './../img/elements/error.svg'
 

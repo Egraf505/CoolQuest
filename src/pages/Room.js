@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import {getRoom, postQuest} from '../http/questAPI'
 
-import { useHistory } from 'react-router-dom'
 import Test from './Test';
 import PinCode from './PinCode';
 import ResultWindow from '../components/ResultWindows';
-import Error from './Error';
-
 
 const Room = () => {
 
