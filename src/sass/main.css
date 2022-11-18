@@ -455,9 +455,16 @@ img {
   margin-top: 15px;
 }
 
+.test_video {
+  width: 100%;
+  max-height: 300px;
+  border-radius: 7px;
+  margin-top: 15px;
+}
+
 .test_form {
   font-family: 'Montserrat', sans-serif;
-  margin-top: 15px;
+  margin: 15px;
 }
 
 .test_form_answers {

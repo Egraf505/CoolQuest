@@ -57,8 +57,9 @@ const Room = () => {
     const sendAnswer = (value) => {
         setActiveWindow(true)
         setOk(value)
+
         if (value) {
-            postQuest(localStorage.setItem('userId'), question.question.roomId, question.question.id)
+            postQuest(localStorage.getItem('userId'), question.question.roomId, question.question.id)
         }
     }
 

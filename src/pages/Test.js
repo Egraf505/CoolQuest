@@ -4,6 +4,8 @@ import testImg from './../img/test-img.jpg'
 
 const Test = ({id, textQuestion, answers, sendAnswer}) => {
     
+    // const [isVideo, setIsVideo] = useState(false)
+
     const [allAnswers, setAllAnswers] = useState([])
 
     useEffect(() => {
@@ -21,6 +23,17 @@ const Test = ({id, textQuestion, answers, sendAnswer}) => {
         <section className='test'>
             <div className='container-mini'>
                 <div className='questionNumber'>Вопрос №{id}</div>
+
+                {/* {isVideo
+                ?
+                <iframe className='test_video' width="1280" height="720" src="https://www.youtube.com/embed/sYiv9UEa4pI" title="Посмотрите видео" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+                :
+                <img 
+                className='test_img'
+                src={testImg}
+                alt='foto'
+                />
+                } */}
 
                 <img 
                     className='test_img'
