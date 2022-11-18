@@ -37,11 +37,18 @@ const Room = () => {
 
         })
         .catch(e => {
-            const urlOld = history.location.pathname
-            history.push({
-                pathname: '/login',
-                search: '?url=' + urlOld,
-            })
+
+            if (e.request.status == 404){
+                history.push({
+                    pathname: '/error',
+                })
+            } else {
+                const urlOld = history.location.pathname
+                history.push({
+                    pathname: '/login',
+                    search: '?url=' + urlOld,
+                })
+            }
         })
         .finally(() => setLoading(false))
 

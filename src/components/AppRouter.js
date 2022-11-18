@@ -8,7 +8,7 @@ const AppRouter = () => {
 
             {publicPages.map(({path, component}) => 
                 <Route key={path} path={path} component={component} exact />
-            )}   
+            )}
             
             <Redirect to={'/error'}/>
 
