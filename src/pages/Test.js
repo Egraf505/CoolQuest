@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react'
 
 import testImg from './../img/test-img.jpg'
 
-const Test = ({id, textQuestion, answers, sendAnswer}) => {
+const Test = ({id, textQuestion, answers, sendAnswer, video}) => {
     
-    // const [isVideo, setIsVideo] = useState(false)
+    const [isVideo, setIsVideo] = useState(video)
 
     const [allAnswers, setAllAnswers] = useState([])
 
@@ -24,7 +24,7 @@ const Test = ({id, textQuestion, answers, sendAnswer}) => {
             <div className='container-mini'>
                 <div className='questionNumber'>Вопрос №{id}</div>
 
-                {/* {isVideo
+                {isVideo
                 ?
                 <iframe className='test_video' width="1280" height="720" src="https://www.youtube.com/embed/sYiv9UEa4pI" title="Посмотрите видео" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
                 :
@@ -33,13 +33,13 @@ const Test = ({id, textQuestion, answers, sendAnswer}) => {
                 src={testImg}
                 alt='foto'
                 />
-                } */}
+                }
 
-                <img 
+                {/* <img 
                     className='test_img'
                     src={testImg}
                     alt='foto'
-                />
+                /> */}
 
                 <div className='question'>
                     {textQuestion}

@@ -25,3 +25,8 @@ export const publicPages = [
         component: Room,
     },
 ]
+
+
+export const typesQuest = {
+    'test': Test,
+}

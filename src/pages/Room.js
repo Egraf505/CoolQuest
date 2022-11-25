@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { useParams, useHistory } from 'react-router-dom';
+import React, { Component, useEffect, useState } from 'react'
+import { useParams, useHistory, Route } from 'react-router-dom';
 import {getRoom, postQuest} from '../http/questAPI'
 
 import Test from './Test';
@@ -92,8 +92,36 @@ const Room = () => {
                     sendAnswer={sendAnswer}
                 />
                 :
-                <PinCode />
+                
+                type == 'Pincode'
+                ?
+                <PinCode
+                />
+                :
+
+                type == 'TestVideo'
+                ?
+                <Test
+                    id={id}
+                    textQuestion={title}
+                    answers={answers}
+                    sendAnswer={sendAnswer}
+                    video
+                />
+                :
+                
+                type == 'TestString'
+                ?
+                <Test
+                    id={id}
+                    textQuestion={title}
+                    answers={answers}
+                    sendAnswer={sendAnswer}
+                />
+                :
+                'Такой тип не существует, перейдите в другой квест'
             }
+
             {
                 activeWindow && 
                 <ResultWindow
