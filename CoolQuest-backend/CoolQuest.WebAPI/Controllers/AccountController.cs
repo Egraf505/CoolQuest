@@ -42,7 +42,7 @@ namespace CoolQuest.WebAPI.Controllers
             {
                 access_token = encodedJwt,
                 id = _db.Users.FirstOrDefault(x => x.Email == identity.Name)!.Id
-            };
+            };    
 
             return Ok(response);
         }
@@ -62,7 +62,7 @@ namespace CoolQuest.WebAPI.Controllers
 
                 _db.Users.Add(user);
                 await _db.SaveChangesAsync();
-
+    
                 return Ok();
             }
             catch (Exception ex)
@@ -83,7 +83,7 @@ namespace CoolQuest.WebAPI.Controllers
             };
 
             ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, "Token", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
-
+     
             return claimsIdentity;
         }
     }

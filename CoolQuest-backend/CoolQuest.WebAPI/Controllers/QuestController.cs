@@ -35,6 +35,7 @@ namespace CoolQuest.WebAPI.Controllers
 
             QuestionDTO questionDTO = new() { Question = question, AnswerFalses = answerFalses };
 
+
             return Ok(questionDTO);
         }
 
@@ -48,7 +49,7 @@ namespace CoolQuest.WebAPI.Controllers
             }
 
             var questions = await _db.Questions.Where(x => x.RoomId == roomId).ToListAsync();
-
+     
             return Ok(questions);
         }
 
@@ -95,7 +96,7 @@ namespace CoolQuest.WebAPI.Controllers
 
             _db.Completeds.Add(new Completed() { UserId = userId, RoomId = roomId, QuestionId = questionId });
             await _db.SaveChangesAsync();
-
+         
             return Ok("Copleted created");
         }       
     }

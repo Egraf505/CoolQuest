@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoolQuest.DbContext", "Cool
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoolQuest.WebAPI", "CoolQuest.WebAPI\CoolQuest.WebAPI.csproj", "{5482B636-669C-40F8-9CDA-B9CFCFABADA5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoolQuest.AdminPanel", "CoolQuest.AdminPanel\CoolQuest.AdminPanel.csproj", "{C2543018-F63C-4061-A996-3FC96072A6AF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +25,10 @@ Global
 		{5482B636-669C-40F8-9CDA-B9CFCFABADA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5482B636-669C-40F8-9CDA-B9CFCFABADA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5482B636-669C-40F8-9CDA-B9CFCFABADA5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2543018-F63C-4061-A996-3FC96072A6AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2543018-F63C-4061-A996-3FC96072A6AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2543018-F63C-4061-A996-3FC96072A6AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2543018-F63C-4061-A996-3FC96072A6AF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
