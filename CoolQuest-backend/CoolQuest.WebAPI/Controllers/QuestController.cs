@@ -1,6 +1,7 @@
 ﻿using CoolQuest.backend.DTO;
 using CoolQuest.DbContext.Context;
 using CoolQuest.DbContext.Models;
+using CoolQuest.WebAPI.DTO;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -29,7 +30,7 @@ namespace CoolQuest.WebAPI.Controllers
             if (question == null)
                 return NotFound(new { errorText = "Question not found" });
 
-            IEnumerable<AnswerFalse> answerFalses = _db.AnswerFalses.Where(x => x.QuestionId == question.Id);
+            IEnumerable<AnswerFalseDTO> answerFalses = _db.AnswerFalses.Where(x => x.QuestionId == question.Id).Select(x => new AnswerFalseDTO() { Id = x.Id, Title = x.Title });
             var type = await _db.Types.FirstOrDefaultAsync(x => x.Id == question.TypeId);
             var room = await _db.Rooms.FirstOrDefaultAsync(x => x.Id == question.RoomId);
 
@@ -58,7 +59,7 @@ namespace CoolQuest.WebAPI.Controllers
                 questionDTO.TitleQuestion = question.Title;
                 questionDTO.Type = _db.Types.FirstOrDefaultAsync(x => x.Id == question.TypeId).Result!.Title;
                 questionDTO.Answer = question.Answer;
-                questionDTO.AnswerFalses = _db.AnswerFalses.Where(x => x.QuestionId == question.Id);
+                questionDTO.AnswerFalses = _db.AnswerFalses.Where(x => x.QuestionId == question.Id).Select(x => new AnswerFalseDTO() { Id = x.Id, Title = x.Title});
 
                 questionDTOs.Add(questionDTO);
             }
