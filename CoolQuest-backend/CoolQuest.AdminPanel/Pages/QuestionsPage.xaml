@@ -11,13 +11,13 @@
     <Grid>
         <StackPanel Orientation="Vertical">
             <TextBlock Text="Questions" FontSize="30"/>
-            <ListBox ItemsSource="{Binding Path=Questions}">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding Path=Title}"/>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
+        <ListBox ItemsSource="{Binding Path=Questions}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Path=Title}"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
         </StackPanel>
     </Grid>
 </Page>
