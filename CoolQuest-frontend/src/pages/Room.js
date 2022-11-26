@@ -7,7 +7,7 @@ import PinCode from './PinCode';
 import ResultWindow from '../components/ResultWindows';
 
 const Room = () => {
-
+ папапа
     let { id } = useParams(); 
 
     const history = useHistory()
