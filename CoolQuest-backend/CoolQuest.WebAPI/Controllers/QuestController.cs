@@ -29,18 +29,18 @@ namespace CoolQuest.WebAPI.Controllers
             if (question == null)
                 return NotFound(new { errorText = "Question not found" });
 
-            List<AnswerFalse> answerFalses = _db.AnswerFalses.Where(x => x.QuestionId == question.Id).ToList();
+            IEnumerable<string> answerFalses = _db.AnswerFalses.Where(x => x.QuestionId == question.Id).Select(x => x.Title);
             var type = await _db.Types.FirstOrDefaultAsync(x => x.Id == question.TypeId);
             var room = await _db.Rooms.FirstOrDefaultAsync(x => x.Id == question.RoomId);
 
-            QuestionDTO questionDTO = new() { Question = question, AnswerFalses = answerFalses };
+            QuestionDTO questionDTO = new() { TitleQuestion = question.Title, Type = type.Title, Answer = question.Answer, AnswerFalses = answerFalses };
 
 
             return Ok(questionDTO);
         }
 
         // вернуть все вопросы с комнаты
-        [HttpGet("/questions{roomId}")]
+        [HttpGet("/questions/{roomId}")]
         public async Task<IActionResult> GetQuestionsAsync(int roomId)
         {
             if (!await _db.Rooms.AnyAsync(x => x.Id == roomId))
@@ -49,8 +49,21 @@ namespace CoolQuest.WebAPI.Controllers
             }
 
             var questions = await _db.Questions.Where(x => x.RoomId == roomId).ToListAsync();
+
+            ICollection<QuestionDTO> questionDTOs = new List<QuestionDTO>();
+
+            foreach (var question in questions)
+            {
+                QuestionDTO questionDTO = new QuestionDTO();
+                questionDTO.TitleQuestion = question.Title;
+                questionDTO.Type = _db.Types.FirstOrDefaultAsync(x => x.Id == question.TypeId).Result!.Title;
+                questionDTO.Answer = question.Answer;
+                questionDTO.AnswerFalses = _db.AnswerFalses.Where(x => x.QuestionId == question.Id).Select(x => x.Title);
+
+                questionDTOs.Add(questionDTO);
+            }
      
-            return Ok(questions);
+            return Ok(questionDTOs);
         }
 
         // Пройдено ли задание пользователем

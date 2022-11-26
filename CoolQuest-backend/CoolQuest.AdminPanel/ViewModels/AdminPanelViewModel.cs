@@ -1,8 +1,11 @@
-﻿using CoolQuest.AdminPanel.Implementations;
+﻿using CoolQuest.AdminPanel.Pages;
+using CoolQuest.DbContext.Context;
 using CoolQuest.DbContext.Models;
 using DevExpress.Mvvm;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Configuration;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
@@ -13,33 +16,72 @@ namespace CoolQuest.AdminPanel.ViewModels
 {
     public class AdminPanelViewModel : ViewModelBase
     {
-        public ObservableCollection<Room> RoomsAndQuestions;
+        // bd
+        private CoolQuestContex _db;
+        private readonly DbContextOptions<CoolQuestContex> options;
+
+        // Pages
+        private QuestionsPage _questionsPage;
+
+        // Collections
+        private ObservableCollection<Room> _rooms;
+        public ObservableCollection<Room> Rooms
+        {
+            get
+            {
+                return _rooms;
+            }
+            set
+            {
+                _rooms = value;
+                RaisePropertiesChanged("Rooms");
+            }
+        }
+
+        // Current items
+        private Room _selectedRoom;
+        public Room SelectedRoom
+        {
+            get
+            {
+                return _selectedRoom;
+            }
+            set
+            {                                          
+                _selectedRoom = value;
+                RaisePropertiesChanged("SelectedRoom");
+            }
+        }
+
+        private Page _currentPage;
+        public Page CurrentPage
+        {
+            get
+            {
+                return _currentPage;
+            }
+            set
+            {
+                _currentPage = value;
+                RaisePropertiesChanged("CurrentPage");
+            }
+        }
+
+        
+        public ObservableCollection<Question> Questions;
 
         public AdminPanelViewModel()
         {
-            Task.Factory.StartNew(SetCollection).Wait();
-        }
-
-        private async Task SetCollection()
-        {
-            RoomRepository roomRepository = new RoomRepository();
-
-            List<Room> rooms = roomRepository.GetItems().ToList();
-
-            roomRepository.Dispose();
-
-            QuestionRepository questionRepository = new QuestionRepository();            
-
-            foreach (var room in rooms)
+            _questionsPage = new QuestionsPage();
+           
+            using (CoolQuestContex db = new CoolQuestContex(DbOptions.Options))
             {
-                room.Questions = questionRepository.GetQuestionsFromRoom(room.Id).ToList();
+                Rooms = new ObservableCollection<Room>(db.Rooms.ToList());
             }
 
-            questionRepository.Dispose();
+            CurrentPage = _questionsPage;
+        }   
+        
 
-            RoomsAndQuestions = new ObservableCollection<Room>(rooms);
-
-            MessageBox.Show("Я всё");
-        }
     }
 }

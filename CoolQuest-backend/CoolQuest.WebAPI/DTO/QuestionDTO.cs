@@ -4,8 +4,10 @@ namespace CoolQuest.backend.DTO
 {
     public class QuestionDTO
     {
-        public Question Question { get; set; }  
-       
-        public IEnumerable<AnswerFalse> AnswerFalses { get; set; }
+        public string TitleQuestion { get; set; }
+        public string Type { get; set; }
+        public string Answer { get; set; }
+
+        public IEnumerable<string> AnswerFalses { get; set; }
     }
 }

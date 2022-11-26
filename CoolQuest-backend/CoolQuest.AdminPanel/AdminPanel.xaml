@@ -3,23 +3,70 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:CoolQuest.AdminPanel"
+        xmlns:local="clr-namespace:CoolQuest.AdminPanel" xmlns:viewmodels="clr-namespace:CoolQuest.AdminPanel.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:AdminPanelViewModel}"
         mc:Ignorable="d"
-        Title="Админская панель" Height="450" Width="800">
+        Title="Админ панель" Height="800" Width="1440"
+        WindowStartupLocation="CenterScreen" Background="Transparent">
     <Grid>
-        <StackPanel >
-            <ListBox ItemsSource="{Binding}">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <Expander Header="{Binding Room.Title}">
-                            <ListBox>
-                                <TextBlock Text="{Binding Question.Title}"/>
-                            </ListBox>
-                        </Expander>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.3*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        
+        <!--Левая панель-->
+        <Border Grid.Column="0" CornerRadius="10" Margin="5"
+                Background="#2F1A19">
+
+            <StackPanel Orientation="Vertical">
+
+                <!--Панель кнопок для комнат-->
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="+"/>
+                    <Button Content="редактировать"/>
+                    <Button Content="удалить"/>
+                </StackPanel>
+                
+                <!--Отображение комнат-->
+                <ScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Disabled">
+
+                    <ListBox ItemsSource="{Binding Path=Rooms}" 
+                             SelectedItem="{Binding Path=SelectedRoom}">
+
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Path=Title}"/>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    
+                </ScrollViewer>
+            </StackPanel>
+        </Border>
+        
+        <!--Правая панель-->
+        <Border Grid.Column="1" CornerRadius="10" Margin="5"
+                Background="#2F1A19">
+
+            <StackPanel Orientation="Vertical">
+    
+                <!--Панель кнопок для вопросов-->
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button Content="+"/>
+                    <Button Content="редактировать"/>
+                    <Button Content="удалить"/>
+                </StackPanel>
+
+
+                <Frame HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="30"
+                       HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                       NavigationUIVisibility="Hidden"
+                       Content="{Binding Path=CurrentPage}">
+
+                </Frame>
+                
+            </StackPanel>
             
-        </StackPanel>
+        </Border>
+        
     </Grid>
 </Window>

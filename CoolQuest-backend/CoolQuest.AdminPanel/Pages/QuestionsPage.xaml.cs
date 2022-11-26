@@ -1,6 +1,7 @@
-﻿using CoolQuest.AdminPanel.ViewModels;
+﻿using CoolQuest.DbContext.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,19 +12,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace CoolQuest.AdminPanel
+namespace CoolQuest.AdminPanel.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для AdminPanel.xaml
+    /// Логика взаимодействия для QuestionsPage.xaml
     /// </summary>
-    public partial class AdminPanel : Window
-    {
-        public AdminPanel()
+    public partial class QuestionsPage : Page
+    {      
+        public QuestionsPage()
         {
-            this.DataContext = new AdminPanelViewModel();
-            InitializeComponent();            
-        }
+            InitializeComponent();
+        }      
     }
 }
