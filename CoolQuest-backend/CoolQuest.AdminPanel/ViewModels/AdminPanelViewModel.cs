@@ -18,11 +18,11 @@ namespace CoolQuest.AdminPanel.ViewModels
     public class AdminPanelViewModel : ViewModelBase
     {
         // bd
-        private CoolQuestContex _db;
-        private readonly DbContextOptions<CoolQuestContex> options;
+        private CoolQuestContex _db;     
 
         // Pages
         private QuestionsPage _questionsPage;
+        private RoomAddUpdate _roomAddUpdate;
 
         // Collections
         private ObservableCollection<Room> _rooms;
@@ -37,7 +37,7 @@ namespace CoolQuest.AdminPanel.ViewModels
                 _rooms = value;
                 RaisePropertiesChanged("Rooms");
             }
-        }
+        }        
 
         // Current items
         private Room _selectedRoom;
@@ -54,10 +54,10 @@ namespace CoolQuest.AdminPanel.ViewModels
                 using (CoolQuestContex db = new CoolQuestContex(DbOptions.Options))
                 {
                     _questionsPage.Questions = new ObservableCollection<Question>(db.Questions.Where(x => x.RoomId == SelectedRoom.Id));
-                }                                
+                }            
                 RaisePropertiesChanged("SelectedRoom");
             }
-        }
+        }        
 
         private Page _currentPage;
         public Page CurrentPage
@@ -71,24 +71,53 @@ namespace CoolQuest.AdminPanel.ViewModels
                 _currentPage = value;
                 RaisePropertiesChanged("CurrentPage");
             }
-        }
-
-        
-        public ObservableCollection<Question> Questions;
+        }      
 
         public ICommand AddRoom
         {
             get
             {
                 return new DelegateCommand(() => {
-                   MessageBox.Show("Добавить комнату");
+                    CurrentPage = new RoomAddUpdate();                   
                 });
             }
         }
 
+        public ICommand UpdateRoom
+        {
+            get
+            {
+                return new DelegateCommand<Room>((room) =>
+                {
+                    CurrentPage = _roomAddUpdate;
+                    _roomAddUpdate.Room = room;
+                    _roomAddUpdate.Room = SelectedRoom;
+                }, (room) => room != null);
+            }
+        }
+
+        public ICommand DeleteRoom
+        {
+            get
+            {
+                return new DelegateCommand(() =>
+                {
+                    if (MessageBox.Show("Вы точно хотите удалить комнату ? \n Вместе с ней удалятся все вопросы","Внимание", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                    {
+                        using (CoolQuestContex db = new CoolQuestContex(DbOptions.Options))
+                        {
+                            db.Rooms.Remove(SelectedRoom);
+                        }
+                        MessageBox.Show($"Комната {SelectedRoom.Id} удалена ");
+                    }
+                }, () => SelectedRoom != null);
+            }
+        }        
+
         public AdminPanelViewModel()
         {
             _questionsPage = new QuestionsPage();
+            _roomAddUpdate = new RoomAddUpdate();
            
             using (CoolQuestContex db = new CoolQuestContex(DbOptions.Options))
             {

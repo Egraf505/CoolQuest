@@ -22,8 +22,9 @@
                 <!--Панель кнопок для комнат-->
                 <StackPanel Orientation="Horizontal">
                     <Button Content="+" Command="{Binding AddRoom}"/>
-                    <Button Content="редактировать"/>
-                    <Button Content="удалить"/>
+                    <Button Content="редактировать" Command="{Binding UpdateRoom}"
+                            CommandParameter="{Binding SelectedRoom}"/>
+                    <Button Content="удалить" Command="{Binding DeleteRoom}"/>
                 </StackPanel>
                 
                 <!--Отображение комнат-->
@@ -47,25 +48,13 @@
         <Border Grid.Column="1" CornerRadius="10" Margin="5"
                 Background="#2F1A19">
 
-            <StackPanel Orientation="Vertical">
-    
-                <!--Панель кнопок для вопросов-->
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <Button Content="+"/>
-                    <Button Content="редактировать"/>
-                    <Button Content="удалить"/>
-                </StackPanel>
-
-
-                <Frame HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="30"
+            <Frame HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="30"
                        HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
                        NavigationUIVisibility="Hidden"
                        Content="{Binding Path=CurrentPage}">
 
-                </Frame>
-                
-            </StackPanel>
-            
+            </Frame>
+
         </Border>
         
     </Grid>

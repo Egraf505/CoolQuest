@@ -1,0 +1,42 @@
+﻿<Window x:Class="CoolQuest.AdminPanel.Windows.AddQuestionWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CoolQuest.AdminPanel.Windows"
+        mc:Ignorable="d"
+        Title="AddQuestion" Height="450" Width="800"
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="0.4*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.Column="0" Grid.Row="0" Text="Вопрос" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Path=Title}" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+
+        <TextBlock Grid.Column="0" Grid.Row="1" Text="Ответ" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Path=Answer}" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+
+        <TextBlock Grid.Column="0" Grid.Row="2" Text="Вопрос" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Path=Video}" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+
+        <TextBlock Grid.Column="0" Grid.Row="3" Text="Вопрос" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <ComboBox Grid.Column="1" Grid.Row="3" Text="{Binding Path=Types}" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+
+        <StackPanel Grid.Row="4" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+            <Button Content="Добавить" Click="Accept_Click" Margin="10"/>
+            <Button Content="Отмена" Click="Cancel_Click" Margin="10"/>
+        </StackPanel>
+    </Grid>
+</Window>

@@ -1,4 +1,7 @@
-﻿using CoolQuest.DbContext.Models;
+﻿using CoolQuest.AdminPanel.Windows;
+using CoolQuest.DbContext.Context;
+using CoolQuest.DbContext.Models;
+using DevExpress.Mvvm;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -22,23 +25,105 @@ namespace CoolQuest.AdminPanel.Pages
     /// <summary>
     /// Логика взаимодействия для QuestionsPage.xaml
     /// </summary>
-    public partial class QuestionsPage : Page , INotifyPropertyChanged
+    public partial class QuestionsPage : Page, INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler? PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName] string prop ="")
+        private Question _selectedQuestion;
+        public Question SelectedQuestion
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
+            get { return _selectedQuestion; }
+            set
+            {
+                _selectedQuestion = value;
+                OnPropertyChanged("SelectedQuestion");
+            }
         }
 
-        private ObservableCollection<Question> _questions;        
+        private ObservableCollection<Question> _questions;
         public ObservableCollection<Question> Questions
         {
             get { return _questions; }
-            set { _questions = value; OnPropertyChanged("Questions"); }
+            set
+            {
+                _questions = value;
+                OnPropertyChanged("Questions");
+            }
         }
+
+        // Окна
+        public AddQuestionWindow AddQuestionWindow = new AddQuestionWindow();
+
+        public ICommand AddQuestion
+        {
+            get
+            {
+                return new DelegateCommand(() =>
+                {
+                    AddQuestionWindow addQuestion = new AddQuestionWindow();
+                    addQuestion.RoomId = (int)Questions.First().RoomId;
+                    if (addQuestion.ShowDialog() == true)
+                    {
+                        MessageBox.Show("Вопрос добавлен");
+                        using (CoolQuestContex db = new CoolQuestContex(DbOptions.Options))
+                        {
+                            int roomid = (int)Questions.First().RoomId;
+
+                            Questions = new ObservableCollection<Question>(db.Questions.Where(x => x.RoomId == roomid));
+                        }
+                    }
+                });
+            }
+        }
+
+        public ICommand UpdateQuestion
+        {
+            get
+            {
+                return new DelegateCommand(() =>
+                {
+                    AddQuestionWindow.RoomId = (int)Questions.First().RoomId;
+                    AddQuestionWindow.SetQuestion(SelectedQuestion);
+                    if (AddQuestionWindow.ShowDialog() == true)
+                    {
+                        MessageBox.Show("Вопрос добавлен");
+                        using (CoolQuestContex db = new CoolQuestContex(DbOptions.Options))
+                        {
+                            int roomid = (int)Questions.First().RoomId;
+
+                            Questions = new ObservableCollection<Question>(db.Questions.Where(x => x.RoomId == roomid));
+                        }
+                    }
+                }, () => SelectedQuestion != null);
+            }
+        }
+
+        public ICommand DeleteQuestion
+        {
+            get
+            {
+                return new DelegateCommand(() =>
+                {
+                    if (MessageBox.Show("Вы точно хотите удалить вопрос ?", "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                    {
+                        MessageBox.Show($"Вопрос удален");
+                        using (CoolQuestContex db = new CoolQuestContex(DbOptions.Options))
+                        {
+                            db.Questions.Remove(SelectedQuestion);
+                        }
+                    }
+                }, () => SelectedQuestion != null);
+            }
+        }
+
         public QuestionsPage()
         {
+            this.DataContext = this;
             InitializeComponent();
-        }      
+        }
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+        public void OnPropertyChanged([CallerMemberName] string prop = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
+        }
     }
 }
