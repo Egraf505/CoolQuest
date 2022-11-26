@@ -61,8 +61,7 @@ namespace CoolQuest.AdminPanel.Pages
                     AddQuestionWindow addQuestion = new AddQuestionWindow();
                     addQuestion.RoomId = (int)Questions.First().RoomId;
                     if (addQuestion.ShowDialog() == true)
-                    {
-                        MessageBox.Show("Вопрос добавлен");
+                    {                        
                         using (CoolQuestContex db = new CoolQuestContex(DbOptions.Options))
                         {
                             int roomid = (int)Questions.First().RoomId;
@@ -107,10 +106,25 @@ namespace CoolQuest.AdminPanel.Pages
                         MessageBox.Show($"Вопрос удален");
                         using (CoolQuestContex db = new CoolQuestContex(DbOptions.Options))
                         {
+                            var AnswerFalse = db.AnswerFalses.Where(x => x.QuestionId == SelectedQuestion.Id);
+                            db.AnswerFalses.RemoveRange(AnswerFalse);
                             db.Questions.Remove(SelectedQuestion);
+                            db.SaveChanges();
                         }
+
+                        UpdateQuestions();
                     }
                 }, () => SelectedQuestion != null);
+            }
+        }
+
+        public void UpdateQuestions()
+        {
+            int roomId = (int)Questions.First().RoomId;
+
+            using (CoolQuestContex db = new CoolQuestContex(DbOptions.Options))
+            {
+                Questions = new ObservableCollection<Question>(db.Questions.Where(x => x.RoomId == roomId));
             }
         }
 

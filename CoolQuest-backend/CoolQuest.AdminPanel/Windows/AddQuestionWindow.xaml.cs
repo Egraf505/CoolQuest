@@ -1,7 +1,9 @@
 ﻿using CoolQuest.DbContext.Context;
 using CoolQuest.DbContext.Models;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -38,8 +40,8 @@ namespace CoolQuest.AdminPanel.Windows
 
         public int RoomId { get; set; }
 
-        private IEnumerable<CoolQuest.DbContext.Models.Type> _types;
-        public IEnumerable<CoolQuest.DbContext.Models.Type> Types
+        private ObservableCollection<CoolQuest.DbContext.Models.Type> _types;
+        public ObservableCollection<CoolQuest.DbContext.Models.Type> Types
         {
             get
             {
@@ -52,12 +54,26 @@ namespace CoolQuest.AdminPanel.Windows
                 OnPropertyChanged("Types");
             }
         }
-        
+
+        private CoolQuest.DbContext.Models.Type _selectedType;
+        private CoolQuest.DbContext.Models.Type SelectedType
+        {
+            get
+            {
+                return _selectedType;
+            }
+            set
+            {
+                _selectedType = value;
+                OnPropertyChanged("SelectedType");
+            }
+        }
+
         public AddQuestionWindow()
         {
             using (CoolQuestContex db = new CoolQuestContex(DbOptions.Options))
             {
-                Types = db.Types.ToList();
+                Types = new ObservableCollection<DbContext.Models.Type>(db.Types.ToList());
             }
 
             this.DataContext = this;
@@ -86,6 +102,7 @@ namespace CoolQuest.AdminPanel.Windows
                     using (CoolQuestContex db = new CoolQuestContex(DbOptions.Options))
                     {
                         Question.RoomId = RoomId;
+                        Question.Type =(CoolQuest.DbContext.Models.Type)combox.SelectedItem;
                         db.Questions.Add(Question);
                         db.SaveChanges();
                     }
@@ -95,6 +112,7 @@ namespace CoolQuest.AdminPanel.Windows
                 {
                     using (CoolQuestContex db = new CoolQuestContex(DbOptions.Options))
                     {
+                        Question.Type = (CoolQuest.DbContext.Models.Type)combox.SelectedItem;
                         db.Entry(Question).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
                         db.SaveChanges();
                     }

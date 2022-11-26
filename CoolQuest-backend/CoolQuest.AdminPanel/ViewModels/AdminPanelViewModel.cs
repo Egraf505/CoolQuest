@@ -23,6 +23,7 @@ namespace CoolQuest.AdminPanel.ViewModels
         // Pages
         private QuestionsPage _questionsPage;
         private RoomAddUpdate _roomAddUpdate;
+        public Page backPage { get; set; }
 
         // Collections
         private ObservableCollection<Room> _rooms;

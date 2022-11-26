@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CoolQuest.AdminPanel.Windows"
         mc:Ignorable="d"
-        Title="AddQuestion" Height="450" Width="800"
+         Height="450" Width="800"
         WindowStartupLocation="CenterScreen">
     <Grid>
 
@@ -23,16 +23,22 @@
         </Grid.ColumnDefinitions>
 
         <TextBlock Grid.Column="0" Grid.Row="0" Text="Вопрос" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Path=Title}" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+        <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding  Path=Question.Title}" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
 
         <TextBlock Grid.Column="0" Grid.Row="1" Text="Ответ" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Path=Answer}" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+        <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Path=Question.Answer}" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
 
-        <TextBlock Grid.Column="0" Grid.Row="2" Text="Вопрос" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Path=Video}" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="0" Grid.Row="2" Text="Видео" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Path=Question.Video}" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
 
-        <TextBlock Grid.Column="0" Grid.Row="3" Text="Вопрос" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <ComboBox Grid.Column="1" Grid.Row="3" Text="{Binding Path=Types}" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="0" Grid.Row="3" Text="Тип" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <ComboBox x:Name="combox" Grid.Column="1" Grid.Row="3" ItemsSource="{Binding Types}" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Title}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
 
         <StackPanel Grid.Row="4" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right">
             <Button Content="Добавить" Click="Accept_Click" Margin="10"/>
