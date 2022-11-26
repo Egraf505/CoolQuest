@@ -2,7 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -20,8 +22,20 @@ namespace CoolQuest.AdminPanel.Pages
     /// <summary>
     /// Логика взаимодействия для QuestionsPage.xaml
     /// </summary>
-    public partial class QuestionsPage : Page
-    {      
+    public partial class QuestionsPage : Page , INotifyPropertyChanged
+    {
+        public event PropertyChangedEventHandler? PropertyChanged;
+        public void OnPropertyChanged([CallerMemberName] string prop ="")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
+        }
+
+        private ObservableCollection<Question> _questions;        
+        public ObservableCollection<Question> Questions
+        {
+            get { return _questions; }
+            set { _questions = value; OnPropertyChanged("Questions"); }
+        }
         public QuestionsPage()
         {
             InitializeComponent();

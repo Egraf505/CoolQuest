@@ -8,6 +8,6 @@ namespace CoolQuest.backend.DTO
         public string Type { get; set; }
         public string Answer { get; set; }
 
-        public IEnumerable<string> AnswerFalses { get; set; }
+        public IEnumerable<AnswerFalse> AnswerFalses { get; set; }
     }
 }

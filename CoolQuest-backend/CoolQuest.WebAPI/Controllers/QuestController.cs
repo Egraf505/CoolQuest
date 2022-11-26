@@ -29,7 +29,7 @@ namespace CoolQuest.WebAPI.Controllers
             if (question == null)
                 return NotFound(new { errorText = "Question not found" });
 
-            IEnumerable<string> answerFalses = _db.AnswerFalses.Where(x => x.QuestionId == question.Id).Select(x => x.Title);
+            IEnumerable<AnswerFalse> answerFalses = _db.AnswerFalses.Where(x => x.QuestionId == question.Id);
             var type = await _db.Types.FirstOrDefaultAsync(x => x.Id == question.TypeId);
             var room = await _db.Rooms.FirstOrDefaultAsync(x => x.Id == question.RoomId);
 
@@ -58,7 +58,7 @@ namespace CoolQuest.WebAPI.Controllers
                 questionDTO.TitleQuestion = question.Title;
                 questionDTO.Type = _db.Types.FirstOrDefaultAsync(x => x.Id == question.TypeId).Result!.Title;
                 questionDTO.Answer = question.Answer;
-                questionDTO.AnswerFalses = _db.AnswerFalses.Where(x => x.QuestionId == question.Id).Select(x => x.Title);
+                questionDTO.AnswerFalses = _db.AnswerFalses.Where(x => x.QuestionId == question.Id);
 
                 questionDTOs.Add(questionDTO);
             }

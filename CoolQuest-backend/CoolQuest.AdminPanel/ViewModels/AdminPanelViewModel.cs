@@ -49,9 +49,12 @@ namespace CoolQuest.AdminPanel.ViewModels
             }
             set
             {
-                CurrentPage = _questionsPage;
-
                 _selectedRoom = value;
+                CurrentPage = _questionsPage;
+                using (CoolQuestContex db = new CoolQuestContex(DbOptions.Options))
+                {
+                    _questionsPage.Questions = new ObservableCollection<Question>(db.Questions.Where(x => x.RoomId == SelectedRoom.Id));
+                }                                
                 RaisePropertiesChanged("SelectedRoom");
             }
         }
@@ -89,7 +92,7 @@ namespace CoolQuest.AdminPanel.ViewModels
            
             using (CoolQuestContex db = new CoolQuestContex(DbOptions.Options))
             {
-                Rooms = new ObservableCollection<Room>(db.Rooms.ToList());
+                Rooms = new ObservableCollection<Room>(db.Rooms.ToList());               
             }
 
             CurrentPage = _questionsPage;
