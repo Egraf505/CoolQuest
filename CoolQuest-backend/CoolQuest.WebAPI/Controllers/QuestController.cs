@@ -8,8 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace CoolQuest.WebAPI.Controllers
-{
-    [Authorize]
+{ 
     [Route("quest")]
     [ApiController]
     public class QuestController : ControllerBase
@@ -41,7 +40,7 @@ namespace CoolQuest.WebAPI.Controllers
         }
 
         // вернуть все вопросы с комнаты
-        [HttpGet("/questions/{roomId}")]
+        [HttpGet("/room/{roomId}")]
         public async Task<IActionResult> GetQuestionsAsync(int roomId)
         {
             if (!await _db.Rooms.AnyAsync(x => x.Id == roomId))
